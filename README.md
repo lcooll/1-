@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from captcha.image import ImageCaptcha
 import random
 import string
-# 設定參數
+# 1設定參數
 WIDTH, HEIGHT = 64, 64        # 驗證碼圖片的寬與高
 CHARACTERS = string.digits    # 定義字元集為 '0123456789'
 NUM_CLASSES = len(CHARACTERS) # 總共 10 個類別
@@ -46,7 +46,7 @@ X_train, y_train = generate_dataset(2000) # 生成 2000 張訓練圖
 X_test, y_test = generate_dataset(400)    # 生成 400 張測試圖
 print("資料生成完畢！")
 
-# 3. 建立 CNN 卷積神經網路模型
+# 2建立 CNN 卷積神經網路模型
 model = models.Sequential([
     # 第一層卷積與池化 (提取邊緣等低階特徵)
     layers.Conv2D(32, (3, 3), activation='relu', input_shape=(HEIGHT, WIDTH, 3)),
@@ -72,7 +72,7 @@ model = models.Sequential([
     layers.Dense(NUM_CLASSES, activation='softmax')
 ])
 
-# 4. 編譯與訓練模型
+# 3編譯與訓練模型
 # 因為我們的標籤(y)是整數型態 (0, 1, 2...)，所以使用 sparse_categorical_crossentropy
 model.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',
@@ -109,12 +109,12 @@ def predict_and_show(index):
     plt.axis('off')
     plt.show()
 
-# 隨機挑選 3 張測試集圖片來看看模型的表現
+# 4隨機挑選 3 張測試集圖片來看看模型的表現
 print("\n展示預測結果：")
 for _ in range(3):
     random_idx = random.randint(0, len(X_test)-1)
     predict_and_show(random_idx)
 
-# 儲存整個模型
+# 5儲存整個模型
 model.save('my_captcha_model.keras')
 print("模型已成功儲存！")
