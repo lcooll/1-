@@ -46,9 +46,7 @@ X_train, y_train = generate_dataset(2000) # 生成 2000 張訓練圖
 X_test, y_test = generate_dataset(400)    # 生成 400 張測試圖
 print("資料生成完畢！")
 
-# ==========================================
 # 3. 建立 CNN 卷積神經網路模型
-# ==========================================
 model = models.Sequential([
     # 第一層卷積與池化 (提取邊緣等低階特徵)
     layers.Conv2D(32, (3, 3), activation='relu', input_shape=(HEIGHT, WIDTH, 3)),
